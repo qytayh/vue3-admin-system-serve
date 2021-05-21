@@ -21,7 +21,7 @@ app.use(bodyparser({
 app.use(json())
 app.use(logger())
 
-app.use(jwt({ secret: publicKey }).unless({ path: [/^\/api\/employee\/login/] }))
+app.use(jwt({ secret:  }).unless({ path: [/^\/api\/employee\/login/] }))
 
 loadRouter(app)
 
