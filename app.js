@@ -4,6 +4,8 @@ const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
+const jwt = require('koa-jwt')
+
 const cors = require('koa-cors')
 
 app.use(cors())
@@ -14,10 +16,12 @@ onerror(app)
 
 // middlewares
 app.use(bodyparser({
-  enableTypes:['json', 'form', 'text']
+  enableTypes: ['json', 'form', 'text']
 }))
 app.use(json())
 app.use(logger())
+
+app.use(jwt({ secret: publicKey }).unless({ path: [/^\/api\/employee\/login/] }))
 
 loadRouter(app)
 
@@ -28,7 +32,7 @@ app.use(async (ctx, next) => {
   // console.log(ctx,'ctx')
   await next()
   const ms = new Date() - start
-  
+
   // console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
 
