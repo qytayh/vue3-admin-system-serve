@@ -5,6 +5,8 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const jwt = require('koa-jwt')
+import { sign } from '../../config/secret'
+
 
 const cors = require('koa-cors')
 
@@ -21,7 +23,7 @@ app.use(bodyparser({
 app.use(json())
 app.use(logger())
 
-app.use(jwt({ secret:  }).unless({ path: [/^\/api\/employee\/login/] }))
+app.use(jwt({ secret: sign }).unless({ path: [/^\/api\/employee\/login/] }))
 
 loadRouter(app)
 
