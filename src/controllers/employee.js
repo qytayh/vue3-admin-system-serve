@@ -1,6 +1,6 @@
 const employeeModel = require("../modules/employee");
 const jwt = require('jsonwebtoken');
-import { sign } from '../../config/secret'
+const sign = require('../../config/secret')
 
 class employeeController {
     /**
@@ -64,7 +64,7 @@ class employeeController {
                             userid: data.id,
                             name: data.name
                         };
-                        let sign = sign;
+                        console.log(sign,'1111111')
                         let options = {
                             expiresIn: '2 days'
                         };

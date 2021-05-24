@@ -5,16 +5,18 @@ const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const jwt = require('koa-jwt')
-import { sign } from '../../config/secret'
-
+const sign = require('./config/secret')
+const jwtMiddle = require('./src/jwt-middle')
 
 const cors = require('koa-cors')
 
 app.use(cors())
 
 const loadRouter = require('./src/routes')
+
 // error handler
 onerror(app)
+jwtMiddle(app)
 
 // middlewares
 app.use(bodyparser({
@@ -31,10 +33,8 @@ loadRouter(app)
 // logger
 app.use(async (ctx, next) => {
   const start = new Date()
-  // console.log(ctx,'ctx')
   await next()
   const ms = new Date() - start
-
   // console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
 

@@ -1,3 +1,3 @@
-module.exports ={
-    sign:'yhxbd'
-}
+
+const sign = 'yhxbd'
+module.exports = sign
