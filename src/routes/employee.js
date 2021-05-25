@@ -12,6 +12,13 @@ router.get('/:id',employeeController.detail)
 //登录
 router.post('/login',employeeController.login);
 
+//员工列表
+router.post('/employeeList',employeeController.employeeList);
+
+router.put('/edit',employeeController.editEmployee);
+
+router.delete('/:id',employeeController.delEmployee);
+
  
 module.exports = router
 

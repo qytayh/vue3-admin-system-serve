@@ -1,5 +1,7 @@
 const db = require('../../config/db');
 const Sequelize = db.sequelize;
+const sequelize =require('sequelize')
+const Op = sequelize.Op
 
 // 引入数据表模型
 const employee = Sequelize.import('../schema/employee');
@@ -33,6 +35,16 @@ class employeeModel {
         })
     }
 
+    static async editEmployee(data){
+        return await employee.update(
+            data,
+        {
+            where:{
+                id:data.id
+            }
+        })
+    }
+
     /**
      * 查询员工信息的详情
      * @param id 员工信息ID
@@ -44,6 +56,32 @@ class employeeModel {
                 ...obj
             }
         });
+    }
+
+    static async getEmployeeList(obj) {
+        return await employee.findAll({
+            where: {
+                name: {
+                    [Op.like]: `%${obj.name}%`
+                },
+                num: {
+                    [Op.like]: `%${obj.num}%`
+                },
+                tel: {
+                    [Op.like]: `%${obj.tel}%`
+                },
+            },
+            order:  [['createdAt', 'DESC']],
+            attributes: { exclude: ['pwd'] }
+        });
+    }
+
+    static async delEmployee({id}){
+        return await employee.destroy({
+            where:{
+                id: id
+              }
+        })
     }
 }
 

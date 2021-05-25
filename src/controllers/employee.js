@@ -37,6 +37,22 @@ class employeeController {
         }
     }
 
+    static async editEmployee(ctx){
+        let req = ctx.request.body;
+        if(req.id){
+            const data = await employeeModel.editEmployee(req);
+            ctx.body = {
+                code: 1,
+                data
+            }
+        }else {
+            ctx.body = {
+                code: 0,
+                msg: '参数不齐全'
+            }
+        }
+    }
+
     static async login(ctx) {
         let req = ctx.request.body;
         if (req.name && req.pwd) {
@@ -120,6 +136,45 @@ class employeeController {
             ctx.body = {
                 code: 0,
                 msg: '人员ID必须传'
+            }
+        }
+    }
+
+    //所有员工
+    static async employeeList(ctx) {
+        let req = ctx.request.body;
+        try {
+            let data = await employeeModel.getEmployeeList(req);
+            ctx.body = {
+                code: 1,
+                data
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+
+    static async delEmployee(ctx){
+        let id = ctx.params.id;
+        if(id){
+            let data = await employeeModel.delEmployee({id});
+            if(data===1){
+                ctx.body = {
+                    code: 1,
+                    data
+                }
+            }else{
+                ctx.body = {
+                    code: 0,
+                    data
+                }
+            }
+            
+        } else {
+            ctx.body = {
+                code: 0,
+                msg: '删除失败'
             }
         }
     }

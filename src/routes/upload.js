@@ -25,6 +25,6 @@ const upload = multer({
     }
 });
 
-router.post('/importEmployee', upload.single('file'), upLoadController.importEmployee)
+router.post('/importEmployee', upload.single('files'), upLoadController.importEmployee)
 
 module.exports = router
