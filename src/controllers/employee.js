@@ -39,9 +39,9 @@ class employeeController {
 
     static async login(ctx) {
         let req = ctx.request.body;
-        if (req.tel && req.pwd) {
+        if (req.name && req.pwd) {
             try {
-                let data = await employeeModel.getEmployeeDetail({ tel: req.tel });
+                let data = await employeeModel.getEmployeeDetail({ tel: req.name });
                 if (data == null) {
                     ctx.body = {
                         code: 0,
@@ -64,7 +64,6 @@ class employeeController {
                             userid: data.id,
                             name: data.name
                         };
-                        console.log(sign,'1111111')
                         let options = {
                             expiresIn: '2 days'
                         };

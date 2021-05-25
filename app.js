@@ -8,7 +8,7 @@ const jwt = require('koa-jwt')
 const sign = require('./config/secret')
 const jwtMiddle = require('./src/jwt-middle')
 
-const cors = require('koa-cors')
+const cors = require('koa2-cors')
 
 app.use(cors())
 

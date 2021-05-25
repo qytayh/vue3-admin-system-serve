@@ -14,7 +14,8 @@ module.exports = function (sequelize, DataTypes) {
         pwd: {
             type: DataTypes.STRING,
             allowNull: true,
-            field: 'pwd'
+            field: 'pwd',
+            defaultValue:'123456'
         },
         tel: {
             type: DataTypes.INTEGER,
@@ -25,7 +26,17 @@ module.exports = function (sequelize, DataTypes) {
             type: DataTypes.STRING,
             allowNull: true,
             field: 'role',
-            default:'employee'
+            defaultValue:'employee'
+        },
+        num: {
+            type: DataTypes.INTEGER,
+            allowNull: true,
+            field: 'num',
+        },
+        note: {
+            type: DataTypes.STRING,
+            allowNull: true,
+            field: 'note',
         },
         // 更新时间
         updatedAt: {
