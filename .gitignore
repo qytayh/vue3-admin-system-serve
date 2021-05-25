@@ -32,5 +32,6 @@ yarn-error.log*
 /src/.idea
 /server/.idea
 
+/db
 /db/*
 /public/*
