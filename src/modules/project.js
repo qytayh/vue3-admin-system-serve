@@ -13,7 +13,7 @@ class projectModel {
      * @param data
      * @returns {Promise<*>}
      */
-    static async createproject(data) {
+    static async createProject(data) {
         return await project.create({
             project: data.project,
             note: data.note
@@ -58,18 +58,14 @@ class projectModel {
     static async getProjectList(obj) {
         return await project.findAll({
             where: {
-                name: {
-                    [Op.like]: `%${obj.name}%`
+                project: {
+                    [Op.like]: `%${obj.project||''}%`
                 },
-                num: {
-                    [Op.like]: `%${obj.num}%`
-                },
-                tel: {
-                    [Op.like]: `%${obj.tel}%`
-                },
+                createdAt:{
+                    [Op.between]:obj.date.length==2?obj.date:[0,new Date()]
+                }
             },
             order:  [['createdAt', 'DESC']],
-            attributes: { exclude: ['pwd'] }
         });
     }
 
