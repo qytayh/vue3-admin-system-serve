@@ -1,4 +1,5 @@
 const projectModel = require("../modules/project");
+const contentModel = require("../modules/content");
 
 class projectController {
     /**
@@ -61,23 +62,26 @@ class projectController {
         if (id) {
             try {
                 // 查询项目信息详情模型
-                let data = await projectModel.getProjectDetail({ id });
-                ctx.response.status = 200;
+                let project = await projectModel.getProjectDetail({ id });
+                let content = await contentModel.getContentList({pid:id})
                 ctx.body = {
                     code: 1,
                     msg: '查询成功',
-                    data
+                    data:{
+                      id,
+                      project:project.project,
+                      note:project.note,
+                      createdAt:project.createdAt,
+                      content
+                    }
                 }
             } catch (err) {
-                ctx.response.status = 412;
                 ctx.body = {
                     code: 0,
                     msg: '查询失败',
-                    data
                 }
             }
         } else {
-            ctx.response.status = 416;
             ctx.body = {
                 code: 0,
                 msg: '项目ID必须传'
@@ -122,13 +126,6 @@ class projectController {
             }
         }
     }
-
-    static async projectEdit(ctx){
-
-    }
-
-
-
     
 }
 

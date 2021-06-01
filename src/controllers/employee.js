@@ -56,6 +56,7 @@ class employeeController {
     static async login(ctx) {
         let req = ctx.request.body;
         if (req.tel && req.pwd) {
+          console.log(req)
             try {
                 let data = await employeeModel.getEmployeeDetail({ tel: req.tel });
                 if (data == null) {

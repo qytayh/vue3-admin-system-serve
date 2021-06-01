@@ -32,7 +32,7 @@ class projectModel {
         })
     }
 
-    static async editproject(data){
+    static async editProject(data){
         return await project.update(
             data,
         {

@@ -46,6 +46,9 @@ class upLoadController {
                 let project = list[0].data[i][1]||''
                 await projectModel.importProject({project,note:''});
                 let pro = await projectModel.getProjectDetail({project})
+                let invoiceDate= JSON.stringify(new Date(1900, 0, list[0].data[i][7]))
+                console.log(invoiceDate)
+                // return
                 let obj = {
                     pid:pro.id,
                     content:list[0].data[i][2]||'',
@@ -53,13 +56,13 @@ class upLoadController {
                     totalPrice:list[0].data[i][4],
                     contractor:list[0].data[i][5],
                     invoiceNo:list[0].data[i][6],
-                    invoiceDate:list[0].data[i][7],
+                    invoiceDate:JSON.parse(invoiceDate),
                     iou:list[0].data[i][8],
                     records:list[0].data[i][9],
                     signature:list[0].data[i][10],
                     payWay:list[0].data[i][11],
                     payDesc:list[0].data[i][12],
-                    note:''
+                    note:(list[0].data[i][13]||list[0].data[i][14])||''
                 }
                 await contentModel.createContent(obj);
             }

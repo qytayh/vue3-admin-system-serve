@@ -21,7 +21,7 @@ class contentModel {
             totalPrice:data.totalPrice,
             contractor:data.contractor,
             invoiceNo:data.invoiceNo,
-            invoiceDate:data.invoiceDate,
+            invoiceDate:data.invoiceDate||JSON.parse(JSON.stringify(new Date())),
             iou:data.iou,
             records:data.records,
             signature:data.signature,
@@ -69,9 +69,10 @@ class contentModel {
     static async getContentList(obj) {
         return await content.findAll({
             where: {
-                content: {
-                    [Op.like]: `%${obj.content||''}%`
-                },
+                // content: {
+                    // [Op.like]: `%${obj.content||''}%`
+                    ...obj
+                // },
             },
             order:  [['createdAt', 'DESC']],
             attributes: { exclude: ['pwd'] }
