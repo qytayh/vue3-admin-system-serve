@@ -56,6 +56,23 @@ class projectController {
       };
     }
   }
+
+  static async contractorList(ctx){
+    try {
+      const data = await contentModel.contractorList()
+      let arr =[]
+      data.forEach(item => {
+          arr.push(item.contractor)
+      });
+      ctx.body = {
+        code: 1,
+        data:arr
+    }
+    } catch (error) {
+      console.log(error)
+    }
+    
+  }
 }
 
 module.exports = projectController;

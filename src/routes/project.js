@@ -19,6 +19,8 @@ router.delete('/content/:id',contentController.contentDel)
 router.put('/content',contentController.editContent)
 router.post('/content',contentController.createContent)
 
+//按负责人
+router.get('/contractor',contentController.contractorList)
 
 
  

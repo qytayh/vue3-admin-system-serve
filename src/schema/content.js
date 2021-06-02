@@ -33,7 +33,7 @@ module.exports = function (sequelize, DataTypes) {
             field: 'contractor',
         },
         invoiceNo: {
-            type: DataTypes.INTEGER,
+            type: DataTypes.STRING,
             allowNull: true,
             field: 'invoiceNo',
         },
