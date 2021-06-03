@@ -21,7 +21,7 @@ router.post('/content',contentController.createContent)
 
 //按负责人
 router.get('/contractor',contentController.contractorList)
-
+router.get('/content/:name',contentController.contentList)
 
  
 module.exports = router

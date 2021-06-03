@@ -5,6 +5,8 @@ const Op = sequelize.Op;
 
 // 引入数据表模型
 const content = Sequelize.import("../schema/content");
+const project = Sequelize.import('../schema/project');
+
 content.sync({ force: false }); //自动创建表
 
 class contentModel {
@@ -72,6 +74,24 @@ class contentModel {
         ...obj,
       },
       order: [["createdAt", "DESC"]],
+    });
+  }
+  static async getContentListGroup({contractor}) {
+    content.belongsTo(project, {
+      foreignKey: 'pid',
+      targetKey: 'id',
+    });
+    return await content.findAll({
+      where: {
+        contractor
+      },
+      include: [
+        {
+          attributes: ['project','note','id'],
+          model: project,
+        },
+      ],
+      order: [["pid", "DESC"]],
     });
   }
 
